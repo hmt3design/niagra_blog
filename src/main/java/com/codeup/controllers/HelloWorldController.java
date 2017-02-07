@@ -1,7 +1,11 @@
 package com.codeup.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /** * Created by Harry on 2/7/17. */
 
@@ -11,6 +15,24 @@ public class HelloWorldController {
     @GetMapping("/home")
     public String homePage(){
         return "home";
+    }
+
+    @GetMapping("/contact")
+    public String contactPage(){
+        return "contact/form";
+    }
+
+    @GetMapping("/test")
+    public String showDefault(Model model) {
+        List<String> names = new ArrayList<>();
+        names.add("Harry");
+        names.add("Emily");
+        names.add("Molly");
+        names.add("Kally");
+
+        model.addAttribute("date", "February 7"); // String
+        model.addAttribute("ListNames", names ); // List
+        return "/test";
     }
 
     @GetMapping("/hello/{name}") // defines a method that should be invoked when a GET request is received for the specified URI
