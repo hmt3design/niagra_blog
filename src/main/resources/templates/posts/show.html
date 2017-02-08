@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <title>Blog single post</title>
+</head>
+<body>
+<nav th:replace="fragments/navbar :: navbar"/>
+<h1>Harry's blog</h1>
+<h2>Single post</h2>
+<h3 style="text-align: center"><span th:text="${post.title}"></span></h3>
+<p style="text-align: center"><span th:text="${post.body}"></span></p>
+</body>
+</html>

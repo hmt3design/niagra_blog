@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <title>Roll Dice</title>
+</head>
+<body>
+<nav th:replace="fragments/navbar :: navbar"/>
+</body>
+<h1>Roll Dice game</h1>
+<h2>Results of your game</h2>
+<h3>You rolled a <span th:text="${n}" /> </h3>
+<h3>The System rolled a <span th:text="${rollDice}" /> </h3>
+<h2 th:if="${n == rollDice}">You won!</h2>
+<h2 th:if="${n != rollDice}">You lost!</h2>
+</html>
