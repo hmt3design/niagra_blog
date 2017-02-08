@@ -12,9 +12,20 @@ import java.util.List;
 @Controller //defines that our class is a controller
 public class HelloWorldController {
 
-    @GetMapping("/home")
+
+    @GetMapping("/")
     public String homePage(){
         return "home";
+    }
+
+    @GetMapping("/resume")
+    public String resumePage(){
+        return "resume";
+    }
+
+    @GetMapping("/portfolio")
+    public String portfolioPage(){
+        return "portfolio";
     }
 
     @GetMapping("/contact")
