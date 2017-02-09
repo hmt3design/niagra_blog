@@ -5,32 +5,44 @@ import com.codeup.services.AdSvc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
-class AdsController {
+public class AdsController {
 
-    @Autowired
-    AdSvc adSvc;
-
-    @GetMapping("/ads")
-    public String ads(Model m){
-        List<Ad> ads = adSvc.findAll();
-        m.addAttribute("ads", ads);
-        //another way to to the same thing without using variables
-        //m.addAttribute("ads", adSvc.findAll());
-        return "demos/adsIndex";
+    @GetMapping("/ads/create")
+    public String showCreateAdForm(Model viewModel) {
+        Ad ad = new Ad();
+        viewModel.addAttribute("ad", ad);
+        return "ads/create";
     }
 
-    @GetMapping("/ads/{id}")
-    public String getAd(@PathVariable int id, Model m){
-        m.addAttribute("ad", adSvc.findOne(id));
-        return "demos/showAd";
-    }
 
+    // RequestParam does the following servlet
+    // String title = request.getParameter("title")
+    // String description = request.getParameter("description")
+    // controller.saveAd(title, descriptin);
+
+    // ModelAttribute does the following servlet
+    // String title = request.getParameter("title")
+    // String description = request.getParameter("description")
+    // Ad ad = new Ad();
+    // ad.settitle(title)
+    // ad.setDescription(description)
+    // controller.saveAd(ad);
+
+    @PostMapping("/ads/create")
+    public String saveAd(
+//            @RequestParam(name ="title") String title,
+//            @RequestParam(name = "description") String description,
+            @ModelAttribute Ad ad, // Post post
+            Model viewModel) {
+        // Sticky form
+        // we would insert into the corresponding table, using a dao
+        // service.save(post); -> {posts.add(post);} (array list in your service)
+        viewModel.addAttribute("ad", ad);
+        return "ads/create";
+    }
 }

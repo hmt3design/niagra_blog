@@ -4,13 +4,17 @@ package com.codeup.models;
  * Created by Harry on 2/8/17.
  */
 public class Ad {
-    long id;
-    String title;
-    String body;
+    private long id;
+    private String title;
+    private String body;
 
     public Ad(String title, String body) {
         this.title = title;
         this.body = body;
+    }
+
+    public Ad(){
+
     }
 
     public long getId() {

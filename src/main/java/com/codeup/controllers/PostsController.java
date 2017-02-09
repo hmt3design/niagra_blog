@@ -1,6 +1,8 @@
 package com.codeup.controllers;
 
 import com.codeup.models.Post;
+import com.codeup.services.PostService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,26 +15,33 @@ import java.util.List;
  */
 @Controller
 public class PostsController {
+    // property injection
+    private PostService service; // instance
+
+    // setter injection -> setService(PostService service){
+    // constructor injection (favored for @Autowired)
+    @Autowired
+    public PostsController(PostService service) { // local variable
+        this.service = service;
+    }
 
     @GetMapping("/posts")
-    public String viewAllPosts(Model model) {
+    public String viewAllPosts(Model viewModel) {
 
         //  array list with several post objects
-        List<Post> posts = new ArrayList<>();
+        List<Post> posts = service.findAllPosts();
 
         // pass the list to the view (through a view model)
-        posts.add(new Post("My first post", "Body of first post"));
-        posts.add(new Post("My second post", "Body of second post"));
-        model.addAttribute("ListOfPosts", posts);
+        viewModel.addAttribute("posts", posts);
 
         return "/posts/index";
     } // index.html
 
     @GetMapping("/posts/{id}")
-    public String viewSinglePost(@PathVariable long id, Model model) {
+    public String findSinglePost(@PathVariable long id, Model viewModel) {
+        Post post = service.findSinglePost(id);
         // inside the method that shows an indidvidual post, create a new post object and pass it to the view
-        Post post = new Post("Hello, World", "World body");
-        model.addAttribute("post", post);
+        viewModel.addAttribute("post", post);
         return "/posts/show"; // show.html
     }
 

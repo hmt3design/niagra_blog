@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header">
-    <title>Blog posts</title>
+<head th:replace="fragments/header :: header(title='Blog posts')">
 </head>
 <body>
 <nav th:replace="fragments/navbar :: navbar"/>
 <h1>Harry's blog</h1>
-<div th:each="post : ${ListOfPosts}">
-<h3 style="text-align: center"><span th:text="${post.title}"></span></h3>
-<p style="text-align: center"><span th:text="${post.body}"></span></p></div>
+<div th:each="post : ${posts}">
+<h3 th:text="${post.title}" />
+<p th:text="${post.body}" /></div>
 </body>
 </html>

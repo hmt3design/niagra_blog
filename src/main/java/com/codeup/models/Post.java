@@ -4,14 +4,16 @@ package com.codeup.models;
  * Created by Harry on 2/8/17.
  */
 public class Post {
-    long id;
-    String title;
-    String body;
+    private long id;
+    private String title;
+    private String body;
 
-    public Post(String title, String body) {
+    public Post(long id, String title, String body) {
+        this.id = id;
         this.title = title;
         this.body = body;
     }
+
     public Post() {
 
     }
