@@ -35,4 +35,9 @@ public class PostService {
     public List<Post> findAllPosts() {
         return posts;
     }
+
+    public void save(Post post) {
+        post.setId(posts.size()+1);
+        posts.add(post);
+    }
 }
