@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header(title='Edit
+ a blog post')">
+</head>
+<body>
+<nav th:replace="fragments/navbar :: navbar"/>
+<h1>Edit a blog post</h1>
+<section th:replace="fragments/form :: form(
+action=${'/posts/' + post.id + '/edit'},
+post=${post},
+label='Update post')" />
+</body>
+</html>

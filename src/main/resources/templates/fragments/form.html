@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+</head>
+<body>
+<section th:fragment="form(action, post, label)">
+<form th:attr="action=${action}" method="post" th:object="${post}">
+    <label>Title</label><br />
+    <input type="text" name="title" th:field="*{title}" /><br />
+    <label>Body</label><br />
+    <input type="text" name="description" th:field="*{body}" /><br />
+    <input type="submit" th:attr="value=${label}" />
+</form>
+</section>
+</body>
+</html>

@@ -2,7 +2,7 @@ package com.codeup.controllers;
 
 import com.codeup.models.Ad;
 import com.codeup.models.Post;
-import com.codeup.repositories.Posts;
+import com.codeup.repositories.PostsRepository;
 import com.codeup.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,22 +19,8 @@ import java.util.List;
 public class PostsController {
 
     @Autowired
-    Posts postsDao;
+    PostsRepository postsDao;
 
-
-/*    @PostMapping("/posts/create")
-    public String savePost(
-//            @RequestParam(name ="title") String title,
-//            @RequestParam(name = "description") String description,
-            @ModelAttribute Post post, // Post post
-            Model viewModel) {
-        // Sticky form
-        // we would insert into the corresponding table, using a dao
-        service.save(post); // -> {posts.add(post);} (array list in your service)
-        viewModel.addAttribute("post", post);
-        return "posts/create";
-    }*/
-    // property injection
     private PostService service; // instance
 
     // setter injection -> setService(PostService service){
@@ -76,16 +62,16 @@ public class PostsController {
         return "redirect:/posts";
     }
 
-//     // think of the next two as Step 1 and Step 2 respectively
-//    @RequestMapping(path = "/posts/create", method = RequestMethod.GET)
-//    @ResponseBody
-//    public String createPostForm() {
-//        return "<h1>Create post form: </h1>";
-//    }
-//
-//    @RequestMapping(path = "/posts/create", method = RequestMethod.POST)
-//    @ResponseBody
-//    public String createPostPage() {
-//        return "<h1>Create post: </h1>";
-//    }
+    @GetMapping("/posts/{id}/edit")
+    public String editedPost(@ModelAttribute Post post, Model viewModel) {
+        viewModel.addAttribute("message", "");
+        return "posts/edit";
+    }
+
+    @PostMapping("/posts/{id}/edit")
+    public String editPost(@ModelAttribute Post post, Model viewModel) {
+        postsDao.save(post);
+        return "redirect:/posts";
+    }
+
 }

@@ -1,6 +1,8 @@
 package com.codeup.services;
 
 import com.codeup.models.Post;
+import com.codeup.repositories.PostsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,23 +14,34 @@ import java.util.List;
 @Service("postService")
 public class PostService {
     private List<Post> posts = new ArrayList<>();
+    private PostsRepository repository;
 
-    public PostService(){
-        createPosts();
+    @Autowired
+    public PostService(PostsRepository repository) {
+        this.repository = repository;
     }
 
+//    public PostService(){
+//        createPosts();
+//    }
+
     // constructor to add test posts
-    private void createPosts() {
-        for (int i = 0; i < 100; i++) {
-            posts.add(
-                    new Post(i + 1, "Title" + (i + 1), "Body" + (i + 1))
-            );
-        }
+//    private void createPosts() {
+//        for (int i = 0; i < 100; i++) {
+//            posts.add(
+//                    new Post(i + 1, "Title" + (i + 1), "Body" + (i + 1))
+//            );
+//        }
+//    }
+
+    public List<Post> all() {
+        //Iterable -> List (casting it)
+        return (List<Post>) repository.findAll(); // select * from posts
     }
 
     // finding a post (retrieving an individual post object)
     public Post findSinglePost(long id) {
-        return posts.get((int) (id-1));
+        return repository.findOne(id); // select * from posts where id = ?
     }
 
     // retrieving all the posts
@@ -37,7 +50,8 @@ public class PostService {
     }
 
     public void save(Post post) {
-        post.setId(posts.size()+1);
-        posts.add(post);
+        repository.save(post); // insert into ads (title, description) values (?,?)
     }
+
+
 }

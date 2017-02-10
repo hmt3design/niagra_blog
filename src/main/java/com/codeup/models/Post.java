@@ -2,9 +2,7 @@ package com.codeup.models;
 
 import javax.persistence.*;
 
-/**
- * Created by Harry on 2/8/17.
- */
+/**  * Created by Harry on 2/8/17.  */
 @Entity
 @Table(name = "posts")
 public class Post {
@@ -19,8 +17,7 @@ public class Post {
     @Column(nullable = false, length = 2000)
     private String body;
 
-    public Post(long id, String title, String body) {
-        this.id = id;
+    public Post(String title, String body) {
         this.title = title;
         this.body = body;
     }
