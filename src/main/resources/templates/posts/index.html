@@ -7,6 +7,8 @@
 <h1>Harry's blog</h1>
 <div th:each="post : ${posts}">
 <h3 th:text="${post.title}" />
-<p th:text="${post.body}" /></div>
+<p th:text="${post.body}" />
+    <p>Author: <span th:text="${post.user.username}"></span></p>
+</div>
 </body>
 </html>

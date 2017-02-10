@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+</head>
+<body>
+<section th:fragment="delete">
+    <form th:action="@{'/posts/' + ${post.id} +  '/delete'}" th:method="post">
+        <input type="hidden" th:value="${post.id}" /><button>Delete</button>
+    </form>
+</section>
+</body>
+</html>

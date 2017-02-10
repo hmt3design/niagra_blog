@@ -1,6 +1,7 @@
 package com.codeup.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**  * Created by Harry on 2/8/17.  */
 @Entity
@@ -16,6 +17,9 @@ public class Post {
 
     @Column(nullable = false, length = 2000)
     private String body;
+
+    @ManyToOne
+    User user;
 
     public Post(String title, String body) {
         this.title = title;
@@ -50,6 +54,15 @@ public class Post {
         this.body = body;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public void save(Post post) {
+
     }
 }

@@ -2,8 +2,11 @@
 package com.codeup.repositories;
 
 import com.codeup.models.Post;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 // Table operations
 // insert -> table name, columns, values
@@ -16,5 +19,8 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface PostsRepository extends CrudRepository<Post, Long> {
+
+    @Query("select p from Post p where p.title like ?1")
+    public List<Post> findTitleLike(String title);
 
 }
