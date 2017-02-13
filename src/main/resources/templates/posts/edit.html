@@ -5,11 +5,13 @@
 </head>
 <body>
 <nav th:replace="fragments/navbar :: navbar"/>
-<h1>Edit a blog post</h1>
-<section th:replace="fragments/form :: form(
+<div class="container">
+    <h1>Edit a blog post</h1>
+    <section th:replace="fragments/form :: form(
 action=${'/posts/' + post.id + '/edit'},
 post=${post},
-label='Update post')" />
-<section th:replace="fragments/delete :: delete" />
+label='Update post')"/>
+    <section th:replace="fragments/delete :: delete"/>
+</div>
 </body>
 </html>

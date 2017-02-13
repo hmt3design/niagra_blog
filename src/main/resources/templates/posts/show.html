@@ -4,9 +4,13 @@
 </head>
 <body>
 <nav th:replace="fragments/navbar :: navbar"/>
-<h1>Harry's blog</h1>
-<h2>Single post</h2>
-<h3 th:text="${post.title}" />
-<p th:text="${post.body}" />
+<div class="container">
+    <h1>Harry's blog</h1>
+    <h2>Single post</h2>
+    <h3 th:text="${post.title}"/>
+    <p th:text="${post.body}"/>
+    <p class="lead" th:text="${post.user.username}"/>
+    <p class="lead" th:text="${post.user.email}"/>
+</div>
 </body>
 </html>

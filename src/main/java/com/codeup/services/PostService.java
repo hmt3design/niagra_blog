@@ -8,9 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Harry on 2/9/17.
- */
+/** * Created by Harry on 2/9/17. */
 @Service("postService")
 public class PostService {
     private List<Post> posts = new ArrayList<>();
@@ -20,19 +18,6 @@ public class PostService {
     public PostService(PostsRepository repository) {
         this.repository = repository;
     }
-
-//    public PostService(){
-//        createPosts();
-//    }
-
-    // constructor to add test posts
-//    private void createPosts() {
-//        for (int i = 0; i < 100; i++) {
-//            posts.add(
-//                    new Post(i + 1, "Title" + (i + 1), "Body" + (i + 1))
-//            );
-//        }
-//    }
 
     public List<Post> all() {
         //Iterable -> List (casting it)
@@ -52,6 +37,4 @@ public class PostService {
     public void save(Post post) {
         repository.save(post); // insert into ads (title, description) values (?,?)
     }
-
-
 }

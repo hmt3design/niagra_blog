@@ -4,9 +4,11 @@
 </head>
 <body>
 <nav th:replace="fragments/navbar :: navbar"/>
+<div class="container">
 <h1>Ads</h1>
 <h2>Single listing</h2>
 <h3 th:text="${ads.title}" />
 <p th:text="${ads.body}" />
+</div>
 </body>
 </html>

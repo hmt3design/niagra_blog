@@ -18,8 +18,8 @@ public class Post {
     @Column(nullable = false, length = 2000)
     private String body;
 
-    @ManyToOne
-    User user;
+    @ManyToOne // defines foreign key
+    private User user; // owner/author
 
     public Post(String title, String body) {
         this.title = title;

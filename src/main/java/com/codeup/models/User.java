@@ -13,19 +13,19 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    private long id;
+
+    @Column(nullable = false) // nullable makes column required
+    private String username;
 
     @Column(nullable = false)
-    String username;
+    private String email;
 
     @Column(nullable = false)
-    String email;
-
-    @Column(nullable = false)
-    String password;
+    private String password;
 
     @OneToMany (mappedBy = "user")
-    List<Post> posts;
+    List<Post> posts; // these are the posts created by this user
 
     public User(String username, String email, String password) {
         this.username = username;
@@ -33,9 +33,21 @@ public class User {
         this.password = password;
     }
 
-    public User() {
+    // pattern
+    // copy constructor -> a alternative to clone
+    public User(User user) {
+        id = user.id;
+        username = user.username;
+        password = user.password;
+        email = user.email;
+        posts = user.posts;
 
     }
+
+    public User() {
+        
+    }
+
 
     public long getId() {
         return id;

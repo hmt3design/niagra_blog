@@ -4,11 +4,14 @@
 </head>
 <body>
 <nav th:replace="fragments/navbar :: navbar"/>
-<h1>Harry's blog</h1>
-<div th:each="post : ${posts}">
-<h3 th:text="${post.title}" />
-<p th:text="${post.body}" />
-    <p>Author: <span th:text="${post.user.username}"></span></p>
+<div class="container">
+    <h1>Harry's blog</h1>
+    <div th:each="post : ${posts}">
+        <h3 th:text="${post.title}"/>
+        <p th:text="${post.body}"/>
+        <p>Author: <span th:text="${post.user.username}"></span></p>
+        <p>email: <span th:text="${post.user.email}"></span></p>
+    </div>
 </div>
 </body>
 </html>

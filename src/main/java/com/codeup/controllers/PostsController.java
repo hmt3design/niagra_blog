@@ -2,6 +2,7 @@ package com.codeup.controllers;
 
 import com.codeup.models.Ad;
 import com.codeup.models.Post;
+import com.codeup.models.User;
 import com.codeup.repositories.PostsRepository;
 import com.codeup.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +59,12 @@ public class PostsController {
 
     @PostMapping("/posts/create")
     public String createPost(@ModelAttribute Post post, Model viewModel) {
+        // get this from the session
+        User user = new User();
+        user.setId(1);
+        post.setUser(user);
         postsDao.save(post);
+        viewModel.addAttribute("post", post);
         return "redirect:/posts";
     }
 
