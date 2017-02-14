@@ -11,6 +11,8 @@
         <p th:text="${post.body}"/>
         <p>Author: <span th:text="${post.user.username}"></span></p>
         <p>email: <span th:text="${post.user.email}"></span></p>
+        <a class="btn btn-default" th:href="${'/posts/' + post.id}">Show</a>
+        <!--<a class="btn btn-primary" th:href=""></a>-->
     </div>
 </div>
 </body>

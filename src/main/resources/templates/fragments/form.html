@@ -8,8 +8,10 @@
 <form th:attr="action=${action}" method="post" th:object="${post}">
     <label>Title</label><br />
     <input type="text" name="title" th:field="*{title}" /><br />
+    <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" />
     <label>Body</label><br />
-    <input type="text" name="description" th:field="*{body}" /><br />
+    <input type="text" name="body" th:field="*{body}" /><br />
+    <p th:if="${#fields.hasErrors('body')}" th:errors="*{body}" />
     <input type="submit" th:attr="value=${label}" /><br />
 </form>
 </section>

@@ -6,10 +6,13 @@ import com.codeup.models.User;
 import com.codeup.repositories.PostsRepository;
 import com.codeup.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,13 +61,15 @@ public class PostsController {
     }
 
     @PostMapping("/posts/create")
-    public String createPost(@ModelAttribute Post post, Model viewModel) {
-        // get this from the session
-        User user = new User();
-        user.setId(1);
+    public String createPost(@Valid Post post, Errors validation, Model viewModel) { // it calls ModelAttribute first
+        if (validation.hasErrors()) {
+            viewModel.addAttribute("errors", validation);
+            viewModel.addAttribute("post", post);
+            return "posts/create";
+        }
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         post.setUser(user);
         postsDao.save(post);
-        viewModel.addAttribute("post", post);
         return "redirect:/posts";
     }
 
