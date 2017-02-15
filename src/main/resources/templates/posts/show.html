@@ -9,6 +9,7 @@
     <h2>Single post</h2>
     <h3 th:text="${post.title}"/>
     <p th:text="${post.body}"/>
+    <img th:attr="src=${'/uploads/' + post.image}" />
     <p class="lead" th:text="${post.user.username}"/>
     <p class="lead" th:text="${post.user.email}"/>
 </div>

@@ -5,7 +5,7 @@
 </head>
 <body>
 <section th:fragment="form(action, post, label)">
-<form th:attr="action=${action}" method="post" th:object="${post}">
+<form th:attr="action=${action}" method="post" th:object="${post}" enctype="multipart/form-data">
     <label>Title</label><br />
     <input type="text" name="title" th:field="*{title}" /><br />
     <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" />

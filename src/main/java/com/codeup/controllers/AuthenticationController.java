@@ -1,17 +1,18 @@
 package com.codeup.controllers;
 
 import com.codeup.models.User;
+import com.codeup.models.UserRole;
+import com.codeup.repositories.RolesRepository;
 import com.codeup.repositories.Users;
+import com.codeup.services.UserService;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -22,12 +23,21 @@ import javax.validation.Valid;
 @Controller
 public class AuthenticationController {
 
-    private Users repository;
+    @Autowired
+    Users usersDao;
+
+    @Autowired
     private PasswordEncoder encoder;
 
     @Autowired
+    RolesRepository userRoles;
+
+    @Autowired
+    UserService userService;
+
+    @Autowired
     public AuthenticationController(Users repository, PasswordEncoder encoder) {
-        this.repository = repository;
+        this.usersDao = repository;
         this.encoder = encoder;
     }
 
@@ -57,9 +67,26 @@ public class AuthenticationController {
             viewModel.addAttribute("user", user);
             return "users/create";
         }
+        if (validation.hasErrors()) {
+            viewModel.addAttribute("errors", validation);
+            viewModel.addAttribute("user", user);
+            return "redirect:/login";
+        }
+
         String hashedPassword = encoder.encode(user.getPassword()); // hash the user's password
         user.setPassword(hashedPassword);
-        repository.save(user); // save user to the database
+        User newUser = usersDao.save(user); // save user to the database
+
+        UserRole userRole = new UserRole();
+        userRole.setRole("ROLE_USER");
+        userRole.setUserId(newUser.getId());
+        userRoles.save(userRole);
         return "redirect:/login"; // redirect the user to the login page
+    }
+
+    @GetMapping("users/{id}")
+    public String showUser(@PathVariable Long id, Model viewModel) {
+        viewModel.addAttribute("user", usersDao.findOne(id));
+        return "users/show";
     }
 }

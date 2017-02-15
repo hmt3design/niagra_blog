@@ -1,5 +1,7 @@
 package com.codeup.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -24,7 +26,11 @@ public class Post {
     @Size(min = 5, message = "Body must contain at least 5 characters")
     private String body;
 
+    @Column
+    private String image;
+
     @ManyToOne // defines foreign key
+    @JsonManagedReference
     private User user; // owner/author
 
     public Post(String title, String body) {
@@ -70,5 +76,13 @@ public class Post {
 
     public void save(Post post) {
 
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

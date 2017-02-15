@@ -6,14 +6,19 @@
 <nav th:replace="fragments/navbar :: navbar"/>
 <div class="container">
     <h1>Harry's blog</h1>
-    <div th:each="post : ${posts}">
-        <h3 th:text="${post.title}"/>
-        <p th:text="${post.body}"/>
-        <p>Author: <span th:text="${post.user.username}"></span></p>
-        <p>email: <span th:text="${post.user.email}"></span></p>
-        <a class="btn btn-default" th:href="${'/posts/' + post.id}">Show</a>
-        <!--<a class="btn btn-primary" th:href=""></a>-->
-    </div>
+    <!--<div th:each="post : ${posts}">-->
+        <!--<h3 th:text="${post.title}"/>-->
+        <!--<p th:text="${post.body}"/>-->
+        <!--<p>Author: <span th:text="${post.user.username}"></span></p>-->
+        <!--<p>email: <span th:text="${post.user.email}"></span></p>-->
+        <!--<a class="btn btn-default" th:href="${'/posts/' + post.id}">Show</a>-->
+        <!--<a sec:authorize="isAuthenticated()"-->
+           <!--class="btn btn-success"-->
+           <!--href="/posts/create"></a>-->
+    <!--</div>-->
+    <div id="load-posts"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/scripts/ads-list.js"></script>
 </div>
 </body>
 </html>

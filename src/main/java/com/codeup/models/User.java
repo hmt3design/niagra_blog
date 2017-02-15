@@ -1,5 +1,7 @@
 package com.codeup.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -31,9 +33,11 @@ public class User {
     @Column(nullable = false, unique = true)
     @NotBlank(message = "Your password cannot be empty")
     @Size(min = 8, message = "Your password should have at least 8 characters")
+    @JsonIgnore
     private String password;
 
     @OneToMany (mappedBy = "user")
+    @JsonBackReference
     List<Post> posts; // these are the posts created by this user
 
     public User(String username, String email, String password) {

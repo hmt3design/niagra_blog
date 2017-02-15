@@ -19,7 +19,7 @@ public class PostService {
         this.repository = repository;
     }
 
-    public List<Post> all() {
+    public List<Post> all(PostsRepository postsDao) {
         //Iterable -> List (casting it)
         return (List<Post>) repository.findAll(); // select * from posts
     }
